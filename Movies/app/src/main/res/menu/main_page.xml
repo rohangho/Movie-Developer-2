@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".MainActivity">
+
+        <!--COMPLETED (1) Add a menu item to open the map-->
+        <item
+            android:id="@+id/action_top"
+            android:title="@string/top_rated"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_pop"
+            android:title="@string/popular"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/favourite"
+            android:title="favourite"
+            app:showAsAction="never"/>
+
+
+</menu>

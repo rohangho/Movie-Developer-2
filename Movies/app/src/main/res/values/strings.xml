@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="error">An error occured try restarting the app</string>
+    <string name="top_rated">Top_Rated</string>
+    <string name="popular">Popular</string>
+    <string name="refresh">Refresh</string>
+    <string name="share">Share</string>
+    <string name="overview">OVERVIEW:</string>
+    <string name="rating">RATINGS:</string>
+</resources>
+
