@@ -39,5 +39,6 @@ public class Favourite extends AppCompatActivity {
                 null,
                 Contract.entry.COLUMN_MOVIE_NAME
         );
+
     }
 }

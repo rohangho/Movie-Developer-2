@@ -25,7 +25,7 @@ public class dbHelper extends SQLiteOpenHelper {
         final String Favourite_TABLE= "CREATE TABLE " +
                 Contract.entry.TABLE_NAME+ " (" +
                 Contract.entry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                Contract.entry.COLUMN_MOVIE_NAME + " TEXT NOT NULL "+
+                Contract.entry.COLUMN_MOVIE_NAME + " TEXT NOT NULL UNIQUE  "+
                 ");";
         Log.i("SQl ",Favourite_TABLE);
         sqLiteDatabase.execSQL(Favourite_TABLE);

@@ -17,6 +17,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
     private Context mContext;
     private Cursor mcursor;
 
+
+
     public FavouriteAdapter(Context context, Cursor cursor) {
         this.mContext = context;
         // COMPLETED (10) Set the local mCount to be equal to count
@@ -41,6 +43,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         if(!mcursor.moveToPosition(position))
             return;
         String name=mcursor.getString(mcursor.getColumnIndex(Contract.entry.COLUMN_MOVIE_NAME));
+
         holder.nameTextView.setText(name);
     }
 

@@ -46,6 +46,12 @@
         android:text="ADD TO FAVOURITE"
         android:id="@+id/favour"
         android:onClick="addlist"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shout"
+        android:id="@+id/share"
+        android:onClick="share"/>
 
 </LinearLayout>
 </ScrollView>
