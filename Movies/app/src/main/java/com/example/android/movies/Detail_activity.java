@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -90,6 +91,17 @@ public class Detail_activity extends AppCompatActivity {
                 .setChooserTitle("Lets Watch")
                 .setText(title)
                 .startChooser();
+
+    }
+    public void WatchTrailer(View view)
+    {
+        String url="https://www.youtube.com/results?search_query="+moviename.getText().toString();
+        Uri webpage = Uri.parse(url);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
     }
 
