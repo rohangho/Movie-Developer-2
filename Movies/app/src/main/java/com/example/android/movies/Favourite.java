@@ -1,5 +1,7 @@
 package com.example.android.movies;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -39,6 +41,14 @@ public class Favourite extends AppCompatActivity {
                 null,
                 Contract.entry.COLUMN_MOVIE_NAME
         );
+
+    }
+    public void onClick(String movies) {
+        Context context = this;
+        Class destinationClass = Detail_activity.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, movies);
+        startActivity(intentToStartDetailActivity);
 
     }
 }

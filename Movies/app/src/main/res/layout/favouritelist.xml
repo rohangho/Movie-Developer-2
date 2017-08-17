@@ -8,6 +8,8 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:textStyle="italic"
-        android:id="@+id/favmon"/>
+        android:id="@+id/favmon"
+        android:clickable="true"
+        />
     
 </LinearLayout>

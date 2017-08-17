@@ -23,6 +23,7 @@ public class Json_builder {
     public static String[] parsedoverview;
     public static String[] parsedimage;
     public static String[] parsedrating;
+    public static String[] parsedid;
 
     public static String[] getSimpleMovieStringsFromJson(Context context, String JsonStr)
             throws JSONException {
@@ -33,16 +34,19 @@ public class Json_builder {
         parsedoverview = new String[getar.length()];
         parsedimage = new String[getar.length()];
         parsedrating = new String[getar.length()];
+        parsedid = new String[getar.length()];
         k = getar.length();
         for (int i = 0; i < getar.length(); i++) {
             JSONObject current = getar.getJSONObject(i);
             String title = current.getString("original_title");
             String overview = current.getString("overview");
             String rat = current.getString("vote_average");
+            String id = current.getString("id");
             imageUrl = "http://image.tmdb.org/t/p/w185/" + current.getString("poster_path");
             Movie newsection = new Movie(imageUrl);
             news.add(newsection);
             parsedimage[i] = imageUrl;
+            parsedid[i]=id;
             parsedrating[i] = rat;
             parsedoverview[i] = overview;
             parsedData[i] = title;
@@ -90,6 +94,16 @@ public class Json_builder {
         }
         return parsedimage[t];
     }
+    public String returnid(String z){
+        int x=0;
+        for(int v=0;v<k;v++)
+        {
+            if(z.equals(parsedData[v]))
+                x=v;
+        }
+        return parsedid[x];
+    }
+
 }
 
 

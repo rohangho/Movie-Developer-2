@@ -1,5 +1,6 @@
 package com.example.android.movies;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -8,7 +9,14 @@ import android.provider.BaseColumns;
 
 public class Contract {
 
+    public static final String AUTHORITY = "com.example.android.movies";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    public static final String PATH = "tasks";
+
     public static final class entry implements BaseColumns{
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH).build();
 
         public static final String TABLE_NAME = "favourite";
         public static final String COLUMN_MOVIE_NAME = "moviename";

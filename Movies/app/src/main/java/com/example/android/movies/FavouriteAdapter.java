@@ -54,7 +54,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         return mcursor.getCount();
     }
 
-    class FavouriteHolder extends RecyclerView.ViewHolder {
+    class FavouriteHolder extends RecyclerView.ViewHolder  {
 
 
         TextView nameTextView;
@@ -63,7 +63,18 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         public FavouriteHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.favmon);
+            nameTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(mContext instanceof Favourite)
+                    {
+                        ((Favourite)mContext).onClick(nameTextView.getText().toString());
+                    }
+                }
+            });
         }
+
 
     }
 
