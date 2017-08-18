@@ -58,10 +58,12 @@
         android:text="Trailer"
         android:id="@+id/trailer"
         android:onClick="atchTrailer"/>
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
+        android:text="Confused!Check the review"
         android:layout_height="wrap_content"
         android:id="@+id/review1"
+        android:onClick="rev"
         android:textSize="22sp"
         android:padding="16dp"/>
 

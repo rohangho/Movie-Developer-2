@@ -32,9 +32,9 @@ public class adapter extends RecyclerView.Adapter<adapter.AdapterViewHolder> {
     public interface AdapterOnClickHandler {
         void onClick(String movies);
     }
-    public adapter(AdapterOnClickHandler clickHandler) {
-        mhandler = clickHandler;
-    }
+    //public adapter() {
+      //  mhandler = clickHandler;
+    //}
 
 
     public class  AdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

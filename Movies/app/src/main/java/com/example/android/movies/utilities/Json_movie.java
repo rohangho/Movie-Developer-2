@@ -2,7 +2,6 @@ package com.example.android.movies.utilities;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +19,7 @@ import java.util.Scanner;
  */
 
 public class Json_movie {
-    public static String ac="I am goot";
+
     public static URL buildurlfortrailer(String id) throws JSONException, MalformedURLException {
         String url = "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=a481f1eb249ec2fb6a0466aa51354515";
         Uri builtUri = Uri.parse(url).buildUpon().build();
@@ -30,12 +29,12 @@ public class Json_movie {
         return url1;
     }
         public static String key(Context context, String url) throws JSONException {
-        Log.i("HEYYYYYYYYYYY",ac);
+
         JSONObject forJson = new JSONObject(url);
         JSONArray getar = forJson.getJSONArray("results");
         JSONObject current = getar.getJSONObject(1);
         String key = current.getString("key");
-        Log.i("SAAAAAAAAAAAAAAAAAA",key);
+
         return key;
     }
     public static String getResponseFromHttpUrl(URL url) throws IOException {

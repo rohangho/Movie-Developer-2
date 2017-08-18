@@ -60,12 +60,8 @@ public class Detail_activity extends AppCompatActivity {
 
                 moviename.setText((mover));
 
-                String id = over.returnid(mover);
-                try {
-                    review.setText(objrev.buildurlforreview(id));
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
+
+
 
 
                 moverviewDisplay.setText(over.check(mover));
@@ -127,6 +123,14 @@ public class Detail_activity extends AppCompatActivity {
 
 
 
+    }
+    public void rev(View view)
+    {
+        Context context = this;
+        Class destinationClass = Review.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, mover);
+        startActivity(intentToStartDetailActivity);
     }
 
     public class FetchTask extends AsyncTask<String, Void, String> {

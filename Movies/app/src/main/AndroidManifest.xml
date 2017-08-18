@@ -5,13 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".SampleApplication"
         android:allowBackup="true"
         android:icon="@drawable/movies"
         android:label="@string/app_name"
         android:roundIcon="@drawable/movies"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".SampleApplication" >
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Detail_activity"
-            />
-        <activity android:name=".Favourite"
-            android:label="Favourite"></activity>
+        <activity android:name=".Detail_activity" />
+        <activity
+            android:name=".Favourite"
+            android:label="Favourite" />
+        <activity android:name=".Review"></activity>
     </application>
 
 </manifest>
