@@ -2,6 +2,7 @@ package com.example.android.movies.utilities;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,23 +20,38 @@ import java.util.Scanner;
  */
 
 public class Json_movie {
+    public static  String[] type;
+    public static String[] key;
 
+
+    public static int nooftrailer;
     public static URL buildurlfortrailer(String id) throws JSONException, MalformedURLException {
         String url = "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=a481f1eb249ec2fb6a0466aa51354515";
+        Log.i("I am Rohan",url);
         Uri builtUri = Uri.parse(url).buildUpon().build();
         URL url1 = null;
         url1 = new URL(builtUri.toString());
 
         return url1;
     }
-        public static String key(Context context, String url) throws JSONException {
+        public static String[] type(Context context, String url) throws JSONException {
 
         JSONObject forJson = new JSONObject(url);
         JSONArray getar = forJson.getJSONArray("results");
-        JSONObject current = getar.getJSONObject(1);
-        String key = current.getString("key");
+        nooftrailer=getar.length();
+            key=new String[getar.length()];
+            type=new String[getar.length()];
+        for (int i=0;i<nooftrailer;i++) {
+            JSONObject current = getar.getJSONObject(i);
+            type[i] = current.getString("type");
+            key[i]=current.getString("key");
 
-        return key;
+        }
+            return type;
+    }
+    public String key(int count)
+    {
+        return key[count];
     }
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

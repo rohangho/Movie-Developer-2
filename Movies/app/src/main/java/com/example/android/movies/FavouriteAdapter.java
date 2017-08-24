@@ -3,10 +3,15 @@ package com.example.android.movies;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.android.movies.utilities.Json_builder;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by ROHAN on 10-08-2017.
@@ -37,6 +42,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
 
 
     }
+    Json_builder obj=new Json_builder();
 
     @Override
     public void onBindViewHolder(FavouriteHolder holder, int position) {
@@ -45,7 +51,16 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
         String name=mcursor.getString(mcursor.getColumnIndex(Contract.entry.COLUMN_MOVIE_NAME));
 
         holder.nameTextView.setText(name);
+        String id=mcursor.getString(mcursor.getColumnIndex(Contract.entry.COLUMN_ID));
+        holder.movieid.setText(id);
+        String pic=obj.checkImage(holder.nameTextView.getText().toString());
+        Log.i("I am Image",pic);
+
+        Picasso.with(mContext).load(pic).into(holder.img);
+
+
     }
+
 
 
 
@@ -58,11 +73,16 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
 
 
         TextView nameTextView;
-        TextView partySizeTextView;
+        ImageView img;
+        TextView movieid;
+
+
 
         public FavouriteHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.favmon);
+            img=(ImageView)itemView.findViewById(R.id.displaypic);
+            movieid=(TextView)itemView.findViewById(R.id.id);
             nameTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

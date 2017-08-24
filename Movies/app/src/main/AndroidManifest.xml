@@ -23,7 +23,14 @@
         <activity
             android:name=".Favourite"
             android:label="Favourite" />
-        <activity android:name=".Review"></activity>
+        <activity android:name=".Review" />
+        <activity android:name=".Trailer_selector" />
+        <activity android:name=".Trailer_Selector"></activity>
+        <provider
+            android:name="com.example.android.movies.Content_Provider"
+            android:authorities="com.example.android.movies"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

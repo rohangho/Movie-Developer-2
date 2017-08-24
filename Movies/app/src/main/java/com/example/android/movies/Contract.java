@@ -11,7 +11,7 @@ public class Contract {
 
     public static final String AUTHORITY = "com.example.android.movies";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
-    public static final String PATH = "tasks";
+    public static final String PATH = "favourite";
 
     public static final class entry implements BaseColumns{
 
@@ -20,6 +20,7 @@ public class Contract {
 
         public static final String TABLE_NAME = "favourite";
         public static final String COLUMN_MOVIE_NAME = "moviename";
+        public static final String COLUMN_ID="id";
 
     }
 

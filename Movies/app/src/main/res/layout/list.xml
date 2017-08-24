@@ -19,11 +19,6 @@
         android:textColor="#ffffff"/>
 
     <!--This View serves as a visual divider between list items-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#dadada"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+
 
 </LinearLayout>

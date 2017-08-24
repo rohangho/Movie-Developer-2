@@ -9,12 +9,12 @@ import android.util.Log;
  * Created by ROHAN on 10-08-2017.
  */
 
-public class dbHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME="fav.db";
     public static final int DATABASE_VERSION=1;
 
-    public dbHelper(Context context){
+    public DbHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
@@ -25,7 +25,8 @@ public class dbHelper extends SQLiteOpenHelper {
         final String Favourite_TABLE= "CREATE TABLE " +
                 Contract.entry.TABLE_NAME+ " (" +
                 Contract.entry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                Contract.entry.COLUMN_MOVIE_NAME + " TEXT NOT NULL UNIQUE  "+
+                Contract.entry.COLUMN_MOVIE_NAME + " TEXT NOT NULL UNIQUE,"+
+                Contract.entry.COLUMN_ID + " TEXT  "+
                 ");";
         Log.i("SQl ",Favourite_TABLE);
         sqLiteDatabase.execSQL(Favourite_TABLE);
@@ -39,4 +40,5 @@ public class dbHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
 
     }
+    SQLiteDatabase db=this.getWritableDatabase();
 }

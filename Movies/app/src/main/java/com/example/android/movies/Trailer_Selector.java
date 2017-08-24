@@ -9,29 +9,39 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.android.movies.utilities.Json_builder;
-import com.example.android.movies.utilities.Json_review;
+import com.example.android.movies.utilities.Json_movie;
 
 import org.json.JSONException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Review extends AppCompatActivity {
-    int counter=0;
+public class Trailer_Selector extends AppCompatActivity {
+
     private RecyclerView rec;
-    private Review_Adapter madapt;
-    public static String mover;
+    private Trailer_Adapter madapt;
+
+    public  String mover;
     private static Bundle bun;
     private final String KEY_RECYCLER_STATE = "recycler_state";
+
+
+
+    public String getMover() {
+        return mover;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
-        rec = (RecyclerView) findViewById(R.id.recyclerview_review);
+        setContentView(R.layout.activity_trailer_selector);
+
+
+        rec = (RecyclerView) findViewById(R.id.all_trailer_list_view);
         LinearLayoutManager layoutlManager
                 = new LinearLayoutManager(this);
-        madapt = new Review_Adapter();
+        madapt = new Trailer_Adapter(this);
         rec.setLayoutManager(layoutlManager);
         rec.setHasFixedSize(true);
 
@@ -41,6 +51,10 @@ public class Review extends AppCompatActivity {
         mover = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
         FetchTask fb = new FetchTask();
         fb.execute();
+    }
+
+    public void onClick(String s) {
+
     }
     @Override
     protected void onResume()
@@ -62,8 +76,6 @@ public class Review extends AppCompatActivity {
 
     }
 
-
-
     public class FetchTask extends AsyncTask<String, Void, String[]> {
 
         Json_builder obj = new Json_builder();
@@ -74,7 +86,7 @@ public class Review extends AppCompatActivity {
 
             URL RequestUrl = null;
             try {
-                RequestUrl = Json_review.buildurlforreview(obj.returnid(mover));
+                RequestUrl = Json_movie.buildurlfortrailer(obj.returnid(mover));
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
@@ -82,13 +94,13 @@ public class Review extends AppCompatActivity {
             }
 
             try {
-                String jsonResponse = Json_review
+                String jsonResponse = Json_movie
                         .getResponseFromHttpUrl(RequestUrl);
 
-                String[] simpleJsonWeatherData = Json_review
-                        .rev(Review.this, jsonResponse);
+                String[] simpleJsonData = Json_movie
+                        .type(Trailer_Selector.this, jsonResponse);
 
-                return simpleJsonWeatherData;
+                return simpleJsonData;
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -109,3 +121,4 @@ public class Review extends AppCompatActivity {
 
     }
 }
+

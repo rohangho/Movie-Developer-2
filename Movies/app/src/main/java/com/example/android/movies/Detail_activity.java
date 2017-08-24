@@ -4,12 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,11 +16,6 @@ import com.example.android.movies.utilities.Json_builder;
 import com.example.android.movies.utilities.Json_movie;
 import com.example.android.movies.utilities.Json_review;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Detail_activity extends AppCompatActivity {
 
@@ -31,14 +25,17 @@ public class Detail_activity extends AppCompatActivity {
     private TextView ratingdisplat;
     private ImageView img;
     private TextView moviename;
+    private EditText trailerselector;
     private TextView review;
     String key = null;
     // ArrayList<String> checkDupli = new ArrayList<>();
     String nameofmovie;
     Json_review objrev = new Json_review();
 
+
     int e = 0;
     Json_builder over = new Json_builder();
+    Json_movie trailerobj=new Json_movie();
     Context context;
 
     @Override
@@ -71,11 +68,12 @@ public class Detail_activity extends AppCompatActivity {
 
             }
         }
-        dbHelper db = new dbHelper(this);
+        DbHelper db = new DbHelper(this);
         mDb = db.getWritableDatabase();
 
 
     }
+
 
     public void addlist(View view) {
         //  int count=0;
@@ -117,9 +115,12 @@ public class Detail_activity extends AppCompatActivity {
     public void atchTrailer(View view) {
 
 
+        Context context = this;
+        Class destinationClass = Trailer_Selector.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, mover);
+        startActivity(intentToStartDetailActivity);
 
-        FetchTask fetchTask = new FetchTask();
-        fetchTask.execute();
 
 
 
@@ -133,72 +134,31 @@ public class Detail_activity extends AppCompatActivity {
         startActivity(intentToStartDetailActivity);
     }
 
-    public class FetchTask extends AsyncTask<String, Void, String> {
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            /* If there's no zip code, there's nothing to look up. */
-            //if (params.length == 0) {
-            //  return null;
-
-            //}
-
-
-            URL RequestUrl = null;
-            try {
-                RequestUrl = Json_movie.buildurlfortrailer(over.returnid(mover));
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            } catch (MalformedURLException e1) {
-                e1.printStackTrace();
-            }
-
-
-            try {
-                String jsonResponse = Json_movie
-                        .getResponseFromHttpUrl(RequestUrl);
-
-                String simpleJsonWeatherData = Json_movie
-                        .key(Detail_activity.this, jsonResponse);
-
-                return simpleJsonWeatherData;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String Data) {
-            if (Data != null) {
-                key = Data;
-                String url = "https://www.youtube.com/watch?v=" + key;
-
-                Uri webpage = Uri.parse(url);
-
-                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                }
-
-
-            }
-
-
-        }
-    }
 
 
         private long addNew(String s) {
             ContentValues cv = new ContentValues();
-
+            cv.put(Contract.entry.COLUMN_ID,over.returnid(s));
             cv.put(Contract.entry.COLUMN_MOVIE_NAME, s);
             return mDb.insert(Contract.entry.TABLE_NAME, null, cv);
 
         }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name",moviename.getText().toString());
+        outState.putString("overview",moverviewDisplay.getText().toString());
+        outState.putString("rating",ratingdisplat.getText().toString());
 
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        moviename.setText(savedInstanceState.getString("name"));
+        moverviewDisplay.setText(savedInstanceState.getString("overview"));
+        ratingdisplat.setText(savedInstanceState.getString("rating"));
+
+    }
 }

@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import static com.example.android.movies.Contract.entry.TABLE_NAME;
 
@@ -17,7 +18,7 @@ import static com.example.android.movies.Contract.entry.TABLE_NAME;
  * Created by ROHAN on 16-08-2017.
  */
 
-public class content_provider extends ContentProvider {
+public class Content_Provider extends ContentProvider {
 
     public static final int TASKS = 100;
     public static final int TASK_WITH_ID = 101;
@@ -29,11 +30,11 @@ public class content_provider extends ContentProvider {
 
         return uriMatcher;
     }
-    private dbHelper mTaskDbHelper;
+    private DbHelper mTaskDbHelper;
     @Override
     public boolean onCreate() {
         Context context = getContext();
-        mTaskDbHelper = new dbHelper(context);
+        mTaskDbHelper = new DbHelper(context);
         return true;
     }
 
@@ -104,11 +105,14 @@ public class content_provider extends ContentProvider {
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         final SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
         int match = sUriMatcher.match(uri);
-        int tasksDeleted; // starts as 0
+        int tasksDeleted;
+
         switch (match) {
             case TASK_WITH_ID:
                 String id = uri.getPathSegments().get(1);
-                tasksDeleted = db.delete(TABLE_NAME, "_id=?", new String[]{id});
+
+                tasksDeleted = db.delete(TABLE_NAME, "id=?", new String[]{id});
+                Log.i("i am goot",Integer.toString(tasksDeleted));
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

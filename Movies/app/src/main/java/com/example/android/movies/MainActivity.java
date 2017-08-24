@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,6 +53,27 @@ public  class MainActivity extends AppCompatActivity
         mrecycle.setLayoutManager(layoutManager);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
         loaddata("popular");
+
+    }
+    private static Bundle bun;
+    private final String KEY_RECYCLER_STATE = "recycler_state";
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if(bun!=null)
+        {   //Restore instance is being called
+            Parcelable listState = bun.getParcelable(KEY_RECYCLER_STATE);
+            mrecycle.getLayoutManager().onRestoreInstanceState(listState);
+        }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outstate)
+    {
+        super.onSaveInstanceState(outstate);
+        bun = new Bundle();
+        Parcelable listState = mrecycle.getLayoutManager().onSaveInstanceState();
+        bun.putParcelable(KEY_RECYCLER_STATE, listState);
 
     }
 
